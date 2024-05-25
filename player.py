@@ -18,7 +18,7 @@ class HumanPlayer(Player): # class to play yourself
         valid_square = False
         val = None
         while not valid_square:
-            square = input(self.letter + '\'s turn. Input move (0-9): ')
+            square = input(self.letter + '\'s turn. Input move (0-8): ')
             try:
                 val = int(square)
                 if val not in game.available_moves():
@@ -37,6 +37,36 @@ class RandomComputerPlayer(Player): # class to play with computer
         square = random.choice(game.available_moves())
         return square
 
+class IntermediateComputerPlayer(Player):
+    def __init__(self, letter):
+        super().__init__(letter)
+
+    def get_move(self, game):
+        if len(game.available_moves()) > 5:
+            square = random.choice(game.available_moves())
+        else:
+            square = self.find_best_move(game, self.letter)
+        return square
+
+    def find_best_move(self, game, player):
+        for square in game.available_moves():
+            game.make_move(square, player)
+            if game.current_winner:
+                game.board[square] = ' '
+                game.current_winner = None
+                return square
+            game.board[square] = ' '
+
+        other_player = 'O' if player == 'X' else 'X'
+        for square in game.available_moves():
+            game.make_move(square, other_player)
+            if game.current_winner:
+                game.board[square] = ' '
+                game.current_winner = None
+                return square
+            game.board[square] = ' '
+
+        return random.choice(game.available_moves())
 
 class SmartComputerPlayer(Player): # class to play with AI
     def __init__(self, letter):

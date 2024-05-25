@@ -1,9 +1,12 @@
 import math
 import time
-from player import HumanPlayer, RandomComputerPlayer, SmartComputerPlayer
+import random
+import customtkinter as ctk
+from tkinter import messagebox
+from player import HumanPlayer, RandomComputerPlayer, IntermediateComputerPlayer, SmartComputerPlayer, Player
 
 
-class TicTacToe():
+class TicTacToe:
     def __init__(self):
         self.board = self.make_board()
         self.current_winner = None
@@ -13,13 +16,12 @@ class TicTacToe():
         return [' ' for _ in range(9)]
 
     def print_board(self):
-        for row in [self.board[i*3:(i+1) * 3] for i in range(3)]:
+        for row in [self.board[i * 3:(i + 1) * 3] for i in range(3)]:
             print('| ' + ' | '.join(row) + ' |')
 
     @staticmethod
     def print_board_nums():
-        # 0 | 1 | 2
-        number_board = [[str(i) for i in range(j*3, (j+1)*3)] for j in range(3)]
+        number_board = [[str(i) for i in range(j * 3, (j + 1) * 3)] for j in range(3)]
         for row in number_board:
             print('| ' + ' | '.join(row) + ' |')
 
@@ -32,24 +34,19 @@ class TicTacToe():
         return False
 
     def winner(self, square, letter):
-        # check the row
         row_ind = math.floor(square / 3)
-        row = self.board[row_ind*3:(row_ind+1)*3]
-        # print('row', row)
+        row = self.board[row_ind * 3:(row_ind + 1) * 3]
         if all([s == letter for s in row]):
             return True
         col_ind = square % 3
-        column = [self.board[col_ind+i*3] for i in range(3)]
-        # print('col', column)
+        column = [self.board[col_ind + i * 3] for i in range(3)]
         if all([s == letter for s in column]):
             return True
         if square % 2 == 0:
             diagonal1 = [self.board[i] for i in [0, 4, 8]]
-            # print('diag1', diagonal1)
             if all([s == letter for s in diagonal1]):
                 return True
             diagonal2 = [self.board[i] for i in [2, 4, 6]]
-            # print('diag2', diagonal2)
             if all([s == letter for s in diagonal2]):
                 return True
         return False
@@ -63,9 +60,7 @@ class TicTacToe():
     def available_moves(self):
         return [i for i, x in enumerate(self.board) if x == " "]
 
-
 def play(game, x_player, o_player, print_game=True):
-
     if print_game:
         game.print_board_nums()
 
@@ -76,7 +71,6 @@ def play(game, x_player, o_player, print_game=True):
         else:
             square = x_player.get_move(game)
         if game.make_move(square, letter):
-
             if print_game:
                 print(letter + ' makes a move to square {}'.format(square))
                 game.print_board()
@@ -85,8 +79,8 @@ def play(game, x_player, o_player, print_game=True):
             if game.current_winner:
                 if print_game:
                     print(letter + ' wins!')
-                return letter  # ends the loop and exits the game
-            letter = 'O' if letter == 'X' else 'X'  # switches player
+                return letter
+            letter = 'O' if letter == 'X' else 'X'
 
         time.sleep(.8)
 
@@ -94,9 +88,68 @@ def play(game, x_player, o_player, print_game=True):
         print('It\'s a tie!')
 
 
+def start_game(mode):
+    if mode == '1':
+        x_player = HumanPlayer('X')
+        o_player = HumanPlayer('O')
+    elif mode == '2':
+        x_player = HumanPlayer('X')
+        o_player = RandomComputerPlayer('O')
+    elif mode == '3':
+        x_player = HumanPlayer('X')
+        o_player = IntermediateComputerPlayer('O')
+    elif mode == '4':
+        x_player = HumanPlayer('X')
+        o_player = SmartComputerPlayer('O')
+    else:
+        messagebox.showerror("Selección no válida", "Por favor, seleccione un modo de juego válido.")
+        return
 
-if __name__ == '__main__':
-    x_player = HumanPlayer('X')
-    o_player = SmartComputerPlayer('O')
     t = TicTacToe()
     play(t, x_player, o_player, print_game=True)
+    return t.current_winner
+
+
+def main():
+    app = ctk.CTk()
+    app.title("Tic Tac Toe")
+    app.geometry('500x400')
+
+    def on_select_mode():
+        mode = mode_var.get()
+        winner = start_game(mode)
+        if winner:
+            if winner == 'X':
+                msg = "¡El jugador X gana!"
+            elif winner == 'O':
+                msg = "¡El jugador O gana!"
+            else:
+                msg = "¡Es un empate!"
+            result = messagebox.askyesno("Fin del Juego", f"{msg}\n¿Quieres jugar de nuevo?")
+            if not result:
+                app.quit()
+
+    mode_var = ctk.StringVar(value="1")
+
+    label = ctk.CTkLabel(app, text="Seleccione el modo de juego:")
+    label.pack(pady=20)
+
+    modes = [
+        ("Jugador vs Jugador", "1"),
+        ("Jugador vs Máquina (Fácil)", "2"),
+        ("Jugador vs Máquina (Intermedio)", "3"),
+        ("Jugador vs IA (Difícil)", "4")
+    ]
+
+    for text, value in modes:
+        radio = ctk.CTkRadioButton(app, text=text, variable=mode_var, value=value)
+        radio.pack(pady=10)
+
+    button = ctk.CTkButton(app, text="Iniciar Juego", command=on_select_mode)
+    button.pack(pady=20)
+
+    app.mainloop()
+
+
+if __name__ == '__main__':
+    main()
