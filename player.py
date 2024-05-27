@@ -1,7 +1,6 @@
 import math
 import random
 
-
 class Player(): # class for player
     def __init__(self, letter):
         self.letter = letter
