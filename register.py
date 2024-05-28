@@ -1,8 +1,10 @@
+import subprocess
 import customtkinter as ctk
 from tkinter import messagebox
 import mysql.connector
 from conect import connect_to_db
 from center import  center_window
+from LogIn import login_screen
 
 def add_user_to_db(username, password):
     conn = connect_to_db()
@@ -49,11 +51,14 @@ def add_user_screen():
     add_button = ctk.CTkButton(add_app, text="Agregar", command=lambda: handle_add_user(entry_username.get(), entry_password.get()))
     add_button.pack(pady=20)
 
+    back_button = ctk.CTkButton(add_app, text="Regresar",command=lambda: [add_app.destroy(), subprocess.Popen(["python", "main.py"])])
+    back_button.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
     add_app.mainloop()
 
 def handle_add_user(username, password):
     if add_user_to_db(username, password):
         messagebox.showinfo("Éxito", "Usuario agregado correctamente")
+        login_screen()
     else:
         messagebox.showerror("Error", "No se pudo agregar el usuario")
 

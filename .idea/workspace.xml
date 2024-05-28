@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e54d30f1-10c2-43ec-8e09-5c924d2daa5c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/menu.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scoreboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LogIn.py" beforeDir="false" afterPath="$PROJECT_DIR$/LogIn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
-    <list id="4a0c24d9-b0e0-432f-b7a6-63d2997eb230" name="Changes by jesus" comment="">
-      <change beforePath="$PROJECT_DIR$/LogIn.py" beforeDir="false" afterPath="$PROJECT_DIR$/LogIn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/menu.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/register.py" beforeDir="false" afterPath="$PROJECT_DIR$/register.py" afterDir="false" />
     </list>
+    <list id="4a0c24d9-b0e0-432f-b7a6-63d2997eb230" name="Changes by jesus" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,17 +41,6 @@
     &quot;accountId&quot;: &quot;51228f08-dce3-46b8-aa0c-d02db4338567&quot;
   }
 }</component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/LogIn.py">
-      <ranges>
-        <range start1="3" end1="4" start2="3" end2="10" changelist="e54d30f1-10c2-43ec-8e09-5c924d2daa5c" />
-        <range start1="10" end1="10" start2="16" end2="18" changelist="e54d30f1-10c2-43ec-8e09-5c924d2daa5c" />
-        <range start1="14" end1="14" start2="22" end2="23" changelist="4a0c24d9-b0e0-432f-b7a6-63d2997eb230" />
-        <range start1="43" end1="47" start2="52" end2="52" changelist="e54d30f1-10c2-43ec-8e09-5c924d2daa5c" />
-        <range start1="67" end1="67" start2="72" end2="75" changelist="e54d30f1-10c2-43ec-8e09-5c924d2daa5c" />
-      </ranges>
-    </file>
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -143,6 +132,8 @@
       <workItem from="1716826029329" duration="4564000" />
       <workItem from="1716836902283" duration="5635000" />
       <workItem from="1716850594781" duration="3928000" />
+      <workItem from="1716924545844" duration="7274000" />
+      <workItem from="1716933414943" duration="4233000" />
     </task>
     <servers />
   </component>
@@ -154,6 +145,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TicTacToe_AI$main.coverage" NAME="main Coverage Results" MODIFIED="1716572987917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TicTacToeAI$main.coverage" NAME="main Coverage Results" MODIFIED="1716854042507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TicTacToeAI$main.coverage" NAME="main Coverage Results" MODIFIED="1716937525291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

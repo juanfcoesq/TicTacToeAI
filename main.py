@@ -9,7 +9,7 @@ def main():
     app.title("Log-In")
     center_window(app, 500, 400)
 
-    ctk.CTkLabel(app, text="Bienvenido a Tic-Tac-Toe", font=("Helvetica", 30)).pack(pady=20)
+    ctk.CTkLabel(app, text="Bienvenido a Tic-Tac-Toe", font=("Helvetica", 30)).pack(pady=60)
 
     login_button = ctk.CTkButton(app, text="Log-In", command=lambda: [app.destroy(), login_screen()])
     login_button.pack(pady=20)
@@ -18,7 +18,6 @@ def main():
     login_button.pack(pady=20)
 
     app.mainloop()
-
 
 if __name__ == '__main__':
     main()
