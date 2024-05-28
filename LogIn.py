@@ -1,17 +1,26 @@
 import customtkinter as ctk
 from tkinter import messagebox
 from conect import connect_to_db
-from center import  center_window
+from center import center_window
+from menu import menu
+
+login_app = ctk.CTk()
+login_app.title("Login")
+center_window(login_app, 500, 400)
+
 def handle_login(username, password):
     print(f"Nombre de usuario ingresado: {username}")  # Mensaje de depuración
     print(f"Contraseña ingresada: {password}")  # Mensaje de depuración
 
     if login(username, password):
         messagebox.showinfo("Login Exitoso", "¡Login exitoso!")
+        menu()
+        login_app.destroy()
     else:
         messagebox.showerror("Error de Login", "Nombre de usuario o contraseña incorrectos.")
 
 def login(username, password):
+    global cursor
     conn = connect_to_db()
     if conn is None:
         print("Conexión a la base de datos fallida")  # Mensaje de depuración
@@ -41,10 +50,6 @@ def login(username, password):
         conn.close()
 
 def login_screen():
-    login_app = ctk.CTk()
-    login_app.title("Login")
-    center_window(login_app, 500, 400)
-
 
     ctk.CTkLabel(login_app, text="Log-In", font=("Helvetica", 30)).pack(pady=20)
 
@@ -64,3 +69,7 @@ def login_screen():
     login_button.pack(pady=20)
 
     login_app.mainloop()
+
+    if login:
+        login_app.destroy()
+        pass

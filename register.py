@@ -10,19 +10,22 @@ def add_user_to_db(username, password):
         print("Conexión a la base de datos fallida")  # Mensaje de depuración
         return False
 
-    try:
-        cursor = conn.cursor()
-        query = "INSERT INTO accounts (username, password) VALUES (%s, %s)"
-        cursor.execute(query, (username, password))
-        conn.commit()
-        print("Usuario agregado correctamente")  # Mensaje de depuración
-        return True
-    except mysql.connector.Error as err:
-        print(f"Error: {err}")
-        return False
-    finally:
-        cursor.close()
-        conn.close()
+    if validar_existencia(username):
+        try:
+            cursor = conn.cursor()
+            query = "INSERT INTO accounts (username, password) VALUES (%s, %s)"
+            cursor.execute(query, (username, password))
+            conn.commit()
+            print("Usuario agregado correctamente")  # Mensaje de depuración
+            return True
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return False
+        finally:
+            cursor.close()
+            conn.close()
+    else:
+        messagebox.showerror("Error", "Usuario ya existente, usa otro nickname")
 
 def add_user_screen():
     add_app = ctk.CTk()
@@ -53,3 +56,17 @@ def handle_add_user(username, password):
         messagebox.showinfo("Éxito", "Usuario agregado correctamente")
     else:
         messagebox.showerror("Error", "No se pudo agregar el usuario")
+
+
+def validar_existencia(username):
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    query = "SELECT * FROM accounts WHERE username = %s"
+    cursor.execute(query, (username,))
+    result = cursor.fetchone()
+
+    if result is None:
+        print("Usuario no encontrado")  # Mensaje de depuración
+        return True
+    else:
+        return False
