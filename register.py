@@ -33,25 +33,27 @@ def add_user_screen():
     add_app = ctk.CTk()
     add_app.title("Agregar Usuario")
     center_window(add_app, 500, 400)
-    ctk.CTkLabel(add_app, text="Registrar Usuario", font=("Helvetica", 30)).pack(pady=20)
+    add_app.configure(fg_color="#EEEEEE")
 
-    label_username = ctk.CTkLabel(add_app, text="Nombre de usuario:", font=("Helvetica", 20))
+    ctk.CTkLabel(add_app, text="Registrar Usuario", font=("Helvetica", 30), text_color="#686D76").pack(pady=20)
+
+    label_username = ctk.CTkLabel(add_app, text="Nombre de usuario:", font=("Helvetica", 20), text_color="#686D76")
     label_username.pack(pady=10)
 
     entry_username = ctk.CTkEntry(add_app)
 
     entry_username.pack(pady=5)
 
-    label_password = ctk.CTkLabel(add_app, text="Contraseña:", font=("Helvetica", 20))
+    label_password = ctk.CTkLabel(add_app, text="Contraseña:", font=("Helvetica", 20), text_color="#686D76")
     label_password.pack(pady=10)
 
     entry_password = ctk.CTkEntry(add_app, show="*")
     entry_password.pack(pady=5)
 
-    add_button = ctk.CTkButton(add_app, text="Agregar", command=lambda: handle_add_user(entry_username.get(), entry_password.get()))
+    add_button = ctk.CTkButton(add_app, text="Agregar", command=lambda: handle_add_user(entry_username.get(), entry_password.get()), text_color="#373A40", fg_color="#DC5F00", hover_color="#686D76")
     add_button.pack(pady=20)
 
-    back_button = ctk.CTkButton(add_app, text="Regresar",command=lambda: [add_app.destroy(), subprocess.Popen(["python", "main.py"])])
+    back_button = ctk.CTkButton(add_app, text="Regresar",command=lambda: [add_app.destroy(), subprocess.Popen(["python", "main.py"])], text_color="#373A40", fg_color="#DC5F00", hover_color="#686D76")
     back_button.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
     add_app.mainloop()
 

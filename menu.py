@@ -10,6 +10,7 @@ def menu():
     menu_app = ctk.CTk()
     menu_app.title("Tic Tac Toe")
     center_window(menu_app, 600, 500)
+    menu_app.configure(fg_color="#EEEEEE")
 
     def on_select_mode():
         mode = mode_var.get()
@@ -27,7 +28,7 @@ def menu():
 
     mode_var = ctk.StringVar(value="1")
 
-    label = ctk.CTkLabel(menu_app, text="Seleccione el modo de juego:")
+    label = ctk.CTkLabel(menu_app, text="Seleccione el modo de juego:", text_color="#686D76")
     label.pack(pady=20)
 
     modes = [
@@ -38,22 +39,22 @@ def menu():
     ]
 
     for text, value in modes:
-        radio = ctk.CTkRadioButton(menu_app, text=text, variable=mode_var, value=value)
+        radio = ctk.CTkRadioButton(menu_app, text=text, variable=mode_var, value=value, text_color="#373A40", fg_color="#DC5F00", hover_color="#686D76")
         radio.pack(pady=10)
 
-    game = ctk.CTkButton(menu_app, text="Iniciar Juego", command=on_select_mode)
+    game = ctk.CTkButton(menu_app, text="Iniciar Juego", command=on_select_mode, text_color="#373A40", fg_color="#DC5F00", hover_color="#686D76")
     game.pack(pady=20)
 
     button_frame = ctk.CTkFrame(menu_app, fg_color="transparent")
     button_frame.pack(pady=40)
 
-    score_button = ctk.CTkButton(button_frame, text="Scoreboard", command=lambda: [score_screen()] )
+    score_button = ctk.CTkButton(button_frame, text="Scoreboard", command=lambda: [score_screen()], text_color="#373A40", fg_color="#DC5F00", hover_color="#686D76")
     score_button.pack(side=ctk.LEFT, pady=10, padx=10)
 
-    config_button = ctk.CTkButton(button_frame, text="Configuración", command=lambda: [config_screen()])
+    config_button = ctk.CTkButton(button_frame, text="Configuración", command=lambda: [config_screen()], text_color="#373A40", fg_color="#DC5F00", hover_color="#686D76")
     config_button.pack(side=ctk.LEFT, pady=10, padx=10)
 
-    back_button = ctk.CTkButton(menu_app, text="Regresar",command=lambda: [menu_app.destroy(), subprocess.Popen(["python", "main.py"])])
+    back_button = ctk.CTkButton(menu_app, text="Regresar",command=lambda: [menu_app.destroy(), subprocess.Popen(["python", "main.py"])], text_color="#373A40", fg_color="#DC5F00", hover_color="#686D76")
     back_button.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
 
     menu_app.mainloop()

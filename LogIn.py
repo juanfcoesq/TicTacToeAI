@@ -48,16 +48,17 @@ def login_screen():
     login_app = ctk.CTk()
     login_app.title("Login")
     center_window(login_app, 500, 400)
+    login_app.configure(fg_color="#EEEEEE")
 
-    ctk.CTkLabel(login_app, text="Log-In", font=("Helvetica", 30)).pack(pady=20)
+    ctk.CTkLabel(login_app, text="Log-In", font=("Helvetica", 30), text_color="#686D76").pack(pady=20)
 
-    label_username = ctk.CTkLabel(login_app, text="Nombre de usuario:", font=("Helvetica", 20))
+    label_username = ctk.CTkLabel(login_app, text="Nombre de usuario:", font=("Helvetica", 20), text_color="#686D76")
     label_username.pack(pady=10)
 
     entry_username = ctk.CTkEntry(login_app)
     entry_username.pack(pady=5)
 
-    label_password = ctk.CTkLabel(login_app, text="Contraseña:", font=("Helvetica", 20))
+    label_password = ctk.CTkLabel(login_app, text="Contraseña:", font=("Helvetica", 20), text_color="#686D76")
     label_password.pack(pady=10)
 
     entry_password = ctk.CTkEntry(login_app, show="*")
@@ -72,10 +73,10 @@ def login_screen():
         else:
             ctk.CTkLabel(login_app, text="Usuario o contraseña incorrectos", font=("Helvetica", 20), fg_color="red").pack(pady=5)
 
-    login_button = ctk.CTkButton(login_app, text="Login", command=attempt_login)
+    login_button = ctk.CTkButton(login_app, text="Login", command=attempt_login, text_color="#373A40", fg_color="#DC5F00", hover_color="#686D76")
     login_button.pack(pady=20)
 
-    back_button = ctk.CTkButton(login_app, text="Regresar", command=lambda: [login_app.destroy(), subprocess.Popen(["python", "main.py"])])
+    back_button = ctk.CTkButton(login_app, text="Regresar", command=lambda: [login_app.destroy(), subprocess.Popen(["python", "main.py"])], text_color="#373A40", fg_color="#DC5F00", hover_color="#686D76")
     back_button.place(relx=1.0, rely=1.0,anchor="se", x=-10, y=-10)
 
     login_app.mainloop()
