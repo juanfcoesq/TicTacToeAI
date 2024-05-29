@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e54d30f1-10c2-43ec-8e09-5c924d2daa5c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/img/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movimientos_compu.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tablerojuego.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LogIn.py" beforeDir="false" afterPath="$PROJECT_DIR$/LogIn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
@@ -41,6 +45,9 @@
     &quot;accountId&quot;: &quot;51228f08-dce3-46b8-aa0c-d02db4338567&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -134,7 +141,7 @@
       <workItem from="1716850594781" duration="3928000" />
       <workItem from="1716924545844" duration="7274000" />
       <workItem from="1716933414943" duration="4233000" />
-      <workItem from="1716946933148" duration="1299000" />
+      <workItem from="1716946933148" duration="12871000" />
     </task>
     <servers />
   </component>
@@ -146,6 +153,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TicTacToe_AI$main.coverage" NAME="main Coverage Results" MODIFIED="1716572987917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TicTacToeAI$main.coverage" NAME="main Coverage Results" MODIFIED="1716948194393" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TicTacToeAI$main.coverage" NAME="main Coverage Results" MODIFIED="1716961143441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
