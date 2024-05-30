@@ -8,6 +8,7 @@ from tablerojuego import inicio
 import main_functions
 
 def menu():
+    global menu_app
     menu_app = ctk.CTk()
     menu_app.title("Tic Tac Toe")
     center_window(menu_app, 700, 600)

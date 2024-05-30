@@ -32,6 +32,7 @@ def add_user_to_db(username, password):
         messagebox.showerror("Error", "Usuario ya existente, usa otro nickname")
 
 def add_user_screen():
+    global add_app
     add_app = ctk.CTk()
     add_app.title("Agregar Usuario")
     center_window(add_app, 700, 600)
@@ -51,7 +52,7 @@ def add_user_screen():
     entry_password = ctk.CTkEntry(add_app, show="*")
     entry_password.pack(pady=5)
 
-    add_button = ctk.CTkButton(add_app, text="Agregar", command=lambda: handle_add_user(entry_username.get(), entry_password.get()), fg_color="#00adb5", hover_color="#f05454", width=200, height=30, font=("Helvetica", 20))
+    add_button = ctk.CTkButton(add_app, text="Agregar", command=lambda: [handle_add_user(entry_username.get(), entry_password.get())], fg_color="#00adb5", hover_color="#f05454", width=200, height=30, font=("Helvetica", 20))
     add_button.pack(pady=60)
 
     back_button = ctk.CTkButton(add_app, text="Regresar",command=lambda: [add_app.destroy(), main_functions.inicial()], fg_color="#00adb5",hover_color="#f05454", width=20, height=20)
@@ -62,6 +63,7 @@ def add_user_screen():
 def handle_add_user(username, password):
     if add_user_to_db(username, password):
         messagebox.showinfo("Éxito", "Usuario agregado correctamente")
+        add_app.destroy()
         login_screen()
     else:
         messagebox.showerror("Error", "No se pudo agregar el usuario")

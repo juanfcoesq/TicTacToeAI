@@ -6,6 +6,7 @@ import customtkinter as ctk
 from center import center_window
 from conect import connect_to_db
 import menu
+import main_functions
 
 def user_logged_in(username):
     print("Usuario ingresado:", username)
@@ -27,6 +28,19 @@ def get_user_id(username):
         id = result[0]
     else:
         id = None
+
+def delete_user(user_id):
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    # Convertir user_id a int si es necesario
+    confirmation = messagebox.askyesno("Confirmación", "¿Estás seguro de que quieres borrar tu cuenta?")
+
+    if confirmation:
+        userid = int(user_id)
+        cursor.execute(f"DELETE FROM accounts WHERE id = {userid}")
+        conn.commit()
+        conn.close()
+        menu.menu_app.destroy()
 
 def configure_account(option, user_id):
     new_value = ""
@@ -88,11 +102,8 @@ def config_screen():
     password_entry = ctk.CTkEntry(config_app, show="*")  # El texto en la entrada se mostrará como asteriscos (*)
     password_entry.pack()
 
-    # Cargar la imagen
-    image_path = "img/home.png"  # Reemplaza esto con la ruta de tu imagen
-    image = Image.open(image_path)
-    image = image.resize((30, 30), Image.LANCZOS)  # Redimensionar la imagen según sea necesario
-
+    back_button = ctk.CTkButton(config_app, text="Borrar cuenta", command=lambda: [config_app.destroy(), delete_user(id), menu.menu()], fg_color="#00adb5", hover_color="#f05454")
+    back_button.pack(pady=20)
     back_button = ctk.CTkButton(config_app, text="Regresar", command=lambda: [config_app.destroy(), menu.menu()], fg_color="#00adb5", hover_color="#f05454", width=20, height=20)
     back_button.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
 
