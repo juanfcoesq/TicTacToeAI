@@ -1,5 +1,3 @@
-import subprocess
-from customtkinter import CTkImage
 from center import center_window
 from game import start_game
 import customtkinter as ctk

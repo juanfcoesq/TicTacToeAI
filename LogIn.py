@@ -1,6 +1,4 @@
-import subprocess
 import customtkinter as ctk
-from customtkinter import *
 from conect import connect_to_db
 from center import center_window
 from PIL import Image
