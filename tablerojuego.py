@@ -4,13 +4,16 @@ from movimientos_compu import movimiento_ia, movimiento_ia_tontito
 from center import center_window
 import random
 import menu
+import time
 from conect import connect_to_db
 
-global modojuego, nummovs, turno, nombrejugador1, nombrejugador2, tablero, listaBotones,puntos
+global modojuego, nummovs, turno, nombrejugador1, nombrejugador2, tablero, listaBotones, puntos
+
 
 def user_logged_in(username):
     print("Usuario ingresado:", username)
     get_user_id(username)
+
 
 def get_user_id(username):
     conn = connect_to_db()
@@ -29,8 +32,9 @@ def get_user_id(username):
     else:
         id = None
 
+
 def inicio(juego):
-    global modojuego, nummovs, turno, nombrejugador1, nombrejugador2, tablero, listaBotones, ventana,puntos
+    global modojuego, nummovs, turno, nombrejugador1, nombrejugador2, tablero, listaBotones, ventana, puntos
     # 0 1v1 , 1 dificil, 2 facil y 3 nivel medio
     a = ""
     match juego:
@@ -46,23 +50,22 @@ def inicio(juego):
         case 2:
             a = "FACIL"
             puntos = 20
+        case 4:
+            a = "SIMULACION DE JUEGO"
+            puntos = 0
 
     ventana = ctk.CTk()
     ventana.geometry('545x720')
-    ventana.title("MODO DE JUEGO: "+a)
+    ventana.title("MODO DE JUEGO: " + a)
     ventana.configure(bg='#222831')
     center_window(ventana, 545, 720)
     modojuego = juego
-    nummovs=0
+    nummovs = 0
     turno = 0
     nombrejugador1 = "X"
     nombrejugador2 = "O"
     listaBotones = []
     tablero = ["N"] * 9
-
-
-
-
 
     # Crear botones del tablero
     for i in range(0, 9):
@@ -100,11 +103,11 @@ def inicio(juego):
     ventana.mainloop()
 
 
-
 def bloquear():
     global listaBotones
     for i in range(0, 9):
         listaBotones[i].configure(state="disabled")
+
 
 def comienzo():
     global nombrejugador1, nombrejugador2, listaBotones, tablero
@@ -113,27 +116,40 @@ def comienzo():
         tablero[i] = "N"
 
     numero_aleatorio = random.randint(1, 2)
-    if numero_aleatorio==1 and not (modojuego==0):
+    if (numero_aleatorio == 1 and not (modojuego == 0)) or modojuego==4:
         ia_move = movimiento_ia_tontito(tablero, "O")
-        movimiento_ia_jugada(ia_move)
+        movimiento_ia_jugada(ia_move, "O")
+        if modojuego==4:
+            time.sleep(1)
+            ventana.update()
+
+    while not (verificar()) and modojuego==4:
+        ia_move = movimiento_ia(tablero, "X")
+        movimiento_ia_jugada(ia_move, "X")
+        time.sleep(1)
+        ventana.update()
+        ia_move = movimiento_ia(tablero, "O")
+        movimiento_ia_jugada(ia_move, "O")
+        time.sleep(1)
+        ventana.update()
 
 
 def movimiento(num):
-    global turno, nombrejugador1, nombrejugador2, tablero, listaBotones, nummovs,modojuego
+    global turno, nombrejugador1, nombrejugador2, tablero, listaBotones, nummovs, modojuego
     if tablero[num] == "N" and turno == 0:
         listaBotones[num].configure(text="X", fg_color="#00adb5", text_color="#000000", font=("Helvetica", 40, "bold"))
         tablero[num] = "X"
         listaBotones[num].configure(state="disabled")
         if not verificar():
             turno = 1
-            if modojuego == 1 or (modojuego== 3 and nummovs%2==0):
+            if modojuego == 1 or (modojuego == 3 and nummovs % 2 == 0):
                 ia_move = movimiento_ia(tablero, "O")
-                movimiento_ia_jugada(ia_move)
-            if modojuego == 2 or (modojuego== 3 and nummovs%2==1):
+                movimiento_ia_jugada(ia_move, "O")
+            if modojuego == 2 or (modojuego == 3 and nummovs % 2 == 1):
                 ia_move = movimiento_ia_tontito(tablero, "O")
-                movimiento_ia_jugada(ia_move)
-            nummovs = nummovs + 1
+                movimiento_ia_jugada(ia_move, "O")
 
+            nummovs = nummovs + 1
 
     if tablero[num] == "N" and turno == 1:
         listaBotones[num].configure(text="0", fg_color="#f05454", text_color="#000000", font=("Helvetica", 40, "bold"))
@@ -142,16 +158,19 @@ def movimiento(num):
         if not verificar():
             turno = 0
 
-def movimiento_ia_jugada(num):
+
+def movimiento_ia_jugada(num, caract):
     global turno, nombrejugador1, nombrejugador2, tablero, listaBotones
+    color = "#f05454"
+    if caract == "X":
+        color = "#00adb5"
+
     if tablero[num] == "N":
-        listaBotones[num].configure(text="O", fg_color="#f05454", text_color="#000000", font=("Helvetica", 40, "bold"))
-        tablero[num] = "O"
+        listaBotones[num].configure(text=caract, fg_color=color, text_color="#000000", font=("Helvetica", 40, "bold"))
+        tablero[num] = caract
         listaBotones[num].configure(state="disabled")
         if not verificar():
             turno = 0
-
-
 
 
 def verificar():
@@ -185,10 +204,11 @@ def verificar():
 
     return bandera
 
+
 def sumarscore(ganador):
     global modojuego, puntos
     user_id = id
-    if not(modojuego==0 ) and  (ganador=="X"):
+    if not (modojuego == 0) and (ganador == "X") and not (modojuego == 4):
 
         #SACAMOS EL SCORE QUE TIENE
         conn = connect_to_db()
@@ -214,10 +234,10 @@ def sumarscore(ganador):
         cursor.close()
         conn.close()
 
-
         messagebox.showinfo("SE TERMINO", f"GANASTE! PUNTUACION GANADA: {puntos}")
-    elif modojuego==0:
+    elif modojuego == 0 or modojuego == 4:
 
         messagebox.showinfo("SE TERMINO", f"GANASTE JUGADOR: {ganador}")
+
     else:
         messagebox.showinfo("SE TERMINO", "PERDISTE  CONTRA LA MAQUINA :(")

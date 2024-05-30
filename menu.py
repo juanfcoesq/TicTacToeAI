@@ -38,7 +38,8 @@ def menu():
         ("Jugador vs Jugador", "0"),
         ("Jugador vs Máquina (Fácil)", "2"),
         ("Jugador vs Máquina (Intermedio)", "3"),
-        ("Jugador vs IA (Difícil)", "1")
+        ("Jugador vs IA (Difícil)", "1"),
+        ("Maquina vs Maquina", "4")
     ]
 
     for i, (text, value) in enumerate(modes):

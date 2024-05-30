@@ -6,6 +6,7 @@ from conect import connect_to_db
 from center import  center_window
 from LogIn import login_screen
 from PIL import Image, ImageTk
+import main_functions
 
 def add_user_to_db(username, password):
     conn = connect_to_db()
@@ -53,7 +54,7 @@ def add_user_screen():
     add_button = ctk.CTkButton(add_app, text="Agregar", command=lambda: handle_add_user(entry_username.get(), entry_password.get()), fg_color="#00adb5", hover_color="#f05454", width=200, height=30, font=("Helvetica", 20))
     add_button.pack(pady=60)
 
-    back_button = ctk.CTkButton(add_app, text="Regresar",command=lambda: [add_app.destroy(), subprocess.Popen(["python", "main.py"])], fg_color="#00adb5", hover_color="#f05454", width=20, height=20)
+    back_button = ctk.CTkButton(add_app, text="Regresar",command=lambda: [add_app.destroy(), main_functions.inicial()], fg_color="#00adb5",hover_color="#f05454", width=20, height=20)
     back_button.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
 
     add_app.mainloop()
